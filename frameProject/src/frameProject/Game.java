@@ -9,6 +9,7 @@ public class Game extends Frame implements MouseListener {
 	private Label l = new Label();
 	private mouseListener m = new mouseListener();
 	private Color c = new Color(50,50,50);
+	private Button btnCloseWindow = new Button();
 	
 	public Game() {
 	}
@@ -33,12 +34,23 @@ public class Game extends Frame implements MouseListener {
 		btn.setLabel("click me");
 		btn.addMouseListener(this);
 		add(btn);
+		
+			
+		btnCloseWindow.setBounds(100,650, 300, 80);
+		btnCloseWindow.setLabel("Quit");
+		btnCloseWindow.addMouseListener(this);
+		add(btnCloseWindow);
+	
 	}
 
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		btn.setLabel("pressed");
+		btnCloseWindow.setLabel("Goodbye!");
+		if(btnCloseWindow.getLabel() == "Goodbye!") {
+			dispose();
+		}
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
