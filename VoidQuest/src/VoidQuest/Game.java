@@ -1,5 +1,6 @@
 package VoidQuest;
 import java.awt.*;
+import java.awt.*;
 import java.awt.color.*;
 import java.awt.event.*;
 import javax.swing.JFrame;
@@ -7,9 +8,11 @@ import javax.swing.JFrame;
 public class Game extends Frame implements MouseListener {
 	private Button playButton = new Button();
 	private Button closeButton = new Button();
+	private Button menuButton = new Button();
+
 	private Label l = new Label();
-	private Color c = new Color(50,50,50);
-	
+	private Color menuBackground = new Color(50,50,50);
+	private Color gameBackground = new Color(10, 10, 10);
 	public Game() {
 	}
 	
@@ -19,7 +22,7 @@ public class Game extends Frame implements MouseListener {
         setTitle("Game");
 	    setLayout(null);
 	    setSize(1920,1080); 
-	    setBackground(c);
+	    setBackground(menuBackground);
 	    
 	    // Closes application upon clicking X
         addWindowListener(new WindowAdapter(){  
@@ -39,8 +42,13 @@ public class Game extends Frame implements MouseListener {
 		closeButton.setLabel("Quit");
 		closeButton.addMouseListener(this);
 		add(closeButton);
-	
 		
+		// Adds Menu Button
+		menuButton.setBounds(40,40,300,80);
+		menuButton.setLabel("Main Menu");
+		menuButton.addMouseListener(this);
+		menuButton.setEnabled(false);
+		menuButton.setVisible(false);
 		
 	}
 
@@ -49,11 +57,34 @@ public class Game extends Frame implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == playButton) {
 			playButton.setLabel("pressed");
+			setBackground(gameBackground);
+			
+			playButton.setEnabled(false);
+			closeButton.setEnabled(false);
+			playButton.setVisible(false);
+			closeButton.setVisible(false);
+			
+			add(menuButton);
+			menuButton.setEnabled(true);
+			menuButton.setVisible(true);
+			
 		} else if(e.getSource() == closeButton) {
 			closeButton.setLabel("Goodbye!");
+			
 			if(closeButton.getLabel() == "Goodbye!") {
 				dispose();
 			}
+		}
+			else if(e.getSource() == menuButton) {
+				playButton.setLabel("Play Void Quest");
+				playButton.setEnabled(true);
+				closeButton.setEnabled(true);
+				menuButton.setEnabled(false);
+
+				playButton.setVisible(true);
+				closeButton.setVisible(true);
+				menuButton.setVisible(false);
+			
 		}
 	}
 	@Override
@@ -75,4 +106,3 @@ public class Game extends Frame implements MouseListener {
 	}
 	
 }
-
